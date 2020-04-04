@@ -81,15 +81,15 @@ teavmc {
 /**
 SNAP_ROOT="/Users/jeff/SnapDev"
 TV_JPATH=$SNAP_ROOT"/SnapTea/lib/teavm-cli.jar"
-SK_CPATH=$SNAP_ROOT"/SnapKit/build/classes/java/main/"
-ST_CPATH=$SNAP_ROOT"/SnapTEA/build/classes/java/main/"
-SD_CPATH=$SNAP_ROOT"/SnapDemos/build/classes/java/main/"
-MY_CPATH=$SNAP_ROOT"/TVMApps/build/classes/java/main/"
+SK_CPATH=$SNAP_ROOT"/SnapKit/out/production/classes/"
+ST_CPATH=$SNAP_ROOT"/SnapTEA/out/production/classes/"
+SD_CPATH=$SNAP_ROOT"/SnapDemos/out/production/classes/"
+MY_CPATH=$SNAP_ROOT"/TVMApps/out/production/classes/"
 TV_CPATH=$TV_JPATH:$SK_CPATH:$ST_CPATH:$SD_CPATH:$MY_CPATH
 TV_MAIN="org.teavm.cli.TeaVMRunner"
 MY_MAIN="tvmapps.TVFacetris"
 MY_OUT=$SNAP_ROOT"/TVMApps/build/teavm"
-TV_OPTS=$TV_MAIN" "$MY_MAIN" -d "$MY_OUT" -G -g"
+TV_OPTS=$TV_MAIN" "$MY_MAIN" -d "$MY_OUT" -m"
 
 java -cp $TV_CPATH $TV_OPTS
 cd TVOUT; http-server -c10
