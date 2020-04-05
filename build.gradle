@@ -84,14 +84,16 @@ TV_JPATH=$SNAP_ROOT"/SnapTea/lib/teavm-cli.jar"
 SK_CPATH=$SNAP_ROOT"/SnapKit/out/production/classes/"
 ST_CPATH=$SNAP_ROOT"/SnapTEA/out/production/classes/"
 SD_CPATH=$SNAP_ROOT"/SnapDemos/out/production/classes/"
+JB_JPATH="/Users/jeff/SnapCode/SnapStudio/lib/jbox2d-2.2.jar"
 MY_CPATH=$SNAP_ROOT"/TVMApps/out/production/classes/"
-TV_CPATH=$TV_JPATH:$SK_CPATH:$ST_CPATH:$SD_CPATH:$MY_CPATH
+TV_CPATH=$TV_JPATH:$SK_CPATH:$ST_CPATH:$SD_CPATH:$MY_CPATH:$JB_JPATH
 TV_MAIN="org.teavm.cli.TeaVMRunner"
 MY_MAIN="tvmapps.TVFacetris"
 MY_OUT=$SNAP_ROOT"/TVMApps/build/teavm"
-TV_OPTS=$TV_MAIN" "$MY_MAIN" -d "$MY_OUT" -m"
+TV_OPTS=$TV_MAIN" "$MY_MAIN" -d "$MY_OUT
 
-java -cp $TV_CPATH $TV_OPTS
+java -cp $TV_CPATH $TV_OPTS -G -g
+java -cp $TV_CPATH $TV_OPTS -m
 cd TVOUT; http-server -c10
 open http://localhost:8080/index.html
 */
