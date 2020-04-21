@@ -14,8 +14,7 @@ repositories {
 
 dependencies {
 
-//    compileOnly 'org.teavm:teavm-classlib:0.6.1'
-//    compileOnly 'org.teavm:teavm-jso-apis:0.6.1'
+    // This artifact has TeaVM runtimes and tools
     compile group: 'org.teavm', name: 'teavm-cli', version: '0.6.1'
 
     compile project(':SnapKit')
@@ -26,31 +25,80 @@ dependencies {
 group = 'tvmapps'
 version = '1.0-SNAPSHOT'
 
-sourceCompatibility = '1.8'
 buildDir = 'build'
+
+mainClassName = 'tvmapps.TVFacetris'
+
+ext.TV_OutDir = '/tmp/tvmout'
 
 /**
  * Run TeaVM compiler.
  */
-task tvmc (type: JavaExec){
+task tv_compile (type: JavaExec){
     description = "Run TeaVM compiler"
     main = 'org.teavm.cli.TeaVMRunner'
-    args = [ "tvmapps.TVFacetris", "-d", "/tmp/tvmout" ]
+    args = [ mainClassName, "-d", TV_OutDir ]
     classpath = sourceSets.main.runtimeClasspath
 }
 
-task tvmc2 {
+/**
+ * Copies resource files from dependent projects to TeaVM output directory.
+ */
+task tv_copy_resources {
 
     doLast {
-        String SNAP_ROOT = "/Users/jeff/SnapDev"
-        println "hey there: " + SNAP_ROOT
-        configurations.compile.each { println it }
 
-        for (Project proj : project.allprojects)
-            println proj.name
+        // Get list of dependencies projects
+        Set <ProjectDependency> projDeps = configurations.compile.allDependencies.findAll { it instanceof ProjectDependency }
+        Set <Project> projs = projDeps.collect { it.dependencyProject }
 
-        for (SourceSet ss : sourceSets.main)
-            for (String cp : ss.runtimeClasspath)
-                println "$ss.name : $cp"
+        // Copy resources from dependencies projects to
+        Set <File> rsrDirs = projs.collectMany { it.sourceSets.main.resources.srcDirs }
+        rsrDirs.each { myFile ->
+            println "copyRes " + myFile + ", " + myFile.getClass()
+            copy {
+                from myFile
+                into TV_OutDir
+                exclude '**/*.java'
+                includeEmptyDirs false
+            }
+        }
+
+        // Get all resource filenames, relative to TeaVM output directory
+        List<String> txtFiles = rsrDirs.collectMany {
+            String path = it.getAbsolutePath()
+            List<String> paths = new FileNameFinder().getFileNames(path, "" /* includes */, '**/*.java' /* excludes */)
+            paths.collect { it.substring(path.length()) }
+        }
+
+        // Write resource filenames to index.txt file in TeaVM output directory
+        File file = file(TV_OutDir + "/index.txt")
+        file.write("")
+        txtFiles.each { file.append(it); file.append('\n') }
     }
 }
+
+/**
+ * Generates the TeaVM index.html file in TeaVM output directory.
+ */
+task tv_gen_index_html {
+
+    doLast {
+
+        File file = file(TV_OutDir + "/index.html")
+        file.write(TV_HTML_Text)
+    }
+}
+
+ext.TV_HTML_Text = '''<!DOCTYPE html>
+<html>
+  <head>
+    <title>Main page</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script type="text/javascript" charset="utf-8" src="classes.js"></script>
+  </head>
+  <body onload="main()">
+    <!-- TODO: add HTML content -->
+  </body>
+</html>
+'''
