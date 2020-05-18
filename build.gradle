@@ -21,6 +21,8 @@ dependencies {
     compile project(':SnapKit')
     compile project(':SnapTea')
     compile project(':SnapDemos')
+    compile project(':SnapBuilder')
+    compile project(':RMDraw')
 }
 
 group = 'tvmapps'
@@ -28,9 +30,18 @@ version = '1.0-SNAPSHOT'
 
 buildDir = 'build'
 
-mainClassName = 'tvmapps.TVFacetris'
+mainClassName = 'tvmapps.TVSnapBuilder'
 
 ext.TV_OutDir = '/tmp/tvmout'
+
+/**
+ * Compile and generate resources and html.
+ */
+task tv_all {
+    dependsOn 'tv_compile'
+    dependsOn 'tv_copy_resources'
+    dependsOn 'tv_gen_index_html'
+}
 
 /**
  * Run TeaVM compiler.
@@ -38,7 +49,7 @@ ext.TV_OutDir = '/tmp/tvmout'
 task tv_compile (type: JavaExec){
     description = "Run TeaVM compiler"
     main = 'org.teavm.cli.TeaVMRunner'
-    args = [ mainClassName, "-d", TV_OutDir ]
+    args = [ "-m", mainClassName, "-d", TV_OutDir ]   // "-g", "-G", "-m"
     classpath = sourceSets.main.runtimeClasspath
 }
 
