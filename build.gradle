@@ -49,7 +49,17 @@ task tv_all {
 task tv_compile (type: JavaExec){
     description = "Run TeaVM compiler"
     main = 'org.teavm.cli.TeaVMRunner'
-    args = [ "-m", mainClassName, "-d", TV_OutDir ]   // "-g", "-G", "-m"
+    args = [ "-g", "-G", mainClassName, "-d", TV_OutDir ]
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+/**
+ * Run TeaVM compiler.
+ */
+task tv_min (type: JavaExec){
+    description = "Run TeaVM compiler"
+    main = 'org.teavm.cli.TeaVMRunner'
+    args = [ "-m", mainClassName, "-d", TV_OutDir ]
     classpath = sourceSets.main.runtimeClasspath
 }
 
