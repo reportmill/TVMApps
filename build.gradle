@@ -20,6 +20,7 @@ dependencies {
 
     compile project(':SnapKit')
     compile project(':SnapTea')
+    compile project(':SnapCharts')
     compile project(':SnapDemos')
     compile project(':SnapBuilder')
     compile project(':RMDraw')
