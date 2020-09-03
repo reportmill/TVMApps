@@ -23,9 +23,9 @@ public class TVSnapCharts {
     }
 
 
-    @JSBody(params = { }, script = "return rmChartsMainArg0;")
+    @JSBody(params = { }, script = "return typeof rmChartsMainArg0 !== 'undefined' ? rmChartsMainArg0 : null;")
     public static native String getMainArg0();
 
-    @JSBody(params = { }, script = "return rmChartsMainArg1;")
+    @JSBody(params = { }, script = "return typeof rmChartsMainArg1 !== 'undefined' ? rmChartsMainArg1 : null;")
     public static native String getMainArg1();
 }
