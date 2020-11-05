@@ -24,6 +24,7 @@ dependencies {
     compile project(':SnapDemos')
     compile project(':SnapBuilder')
     compile project(':RMDraw')
+    compile project(':RM16')
 }
 
 group = 'tvmapps'
