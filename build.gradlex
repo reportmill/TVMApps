@@ -1,12 +1,11 @@
 
 repositories {
-    mavenCentral()
 
     // Maven package repository for latest TeaVM
     maven { url 'https://teavm.org/maven/repository' }
 
-    // Jitpack.io builds Github packages
-    //maven { url 'https://jitpack.io' }
+    // Jitpack.io builds maven packages from Github repositories
+    maven { url 'https://jitpack.io' }
 }
 
 project.ext.teavmVersion = "0.7.0-SNAPSHOT"
@@ -27,7 +26,7 @@ dependencies {
     implementation 'commons-cli:commons-cli:1.4'
 
     // This artifact has TeaVM built by jitpack.io
-    /*compile 'com.github.konsoletyper.teavm:teavm:220537d984'
+    compile 'com.github.konsoletyper.teavm:teavm:220537d984'
     compile 'com.github.konsoletyper.teavm:teavm-jso:220537d984'
     compile 'com.github.konsoletyper.teavm:teavm-jso-apis:220537d984'
     compile 'com.github.konsoletyper.teavm:teavm-jso-impl:220537d984'
@@ -37,7 +36,8 @@ dependencies {
     compile 'com.github.konsoletyper.teavm:teavm-platform:220537d984'
     compile 'com.github.konsoletyper.teavm:teavm-tooling:220537d984'
     compile 'com.github.konsoletyper.teavm:teavm-maven:220537d984'
-    compile 'com.github.konsoletyper.teavm:teavm-devserver:220537d984'*/
+    compile 'com.github.konsoletyper.teavm:teavm-devserver:220537d984'
+    implementation 'commons-cli:commons-cli:1.4'
 
     compile project(':SnapKit')
     compile project(':SnapTea')

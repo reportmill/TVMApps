@@ -6,7 +6,6 @@ plugins {
 
 repositories {
     mavenCentral()
-    //mavenLocal()
 
     // This is for TeaVM official release
     maven { url = 'https://repo.maven.apache.org/maven2' }
