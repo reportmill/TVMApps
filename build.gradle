@@ -1,23 +1,25 @@
 
 plugins {
-    id 'java'
-    id 'maven-publish'
-    id 'idea'
     id 'application'
+    id 'idea'
 }
 
 repositories {
-    mavenLocal()
-    maven {
-        url = 'https://repo.maven.apache.org/maven2'
-    }
+    mavenCentral()
+    //mavenLocal()
+
+    // This is for TeaVM official release
+    maven { url = 'https://repo.maven.apache.org/maven2' }
 }
+
+project.ext.teavmVersion = "0.7.0-SNAPSHOT"
 
 dependencies {
 
     // This artifact has TeaVM runtimes and tools
     compile group: 'org.teavm', name: 'teavm-cli', version: '0.6.1'
 
+    // Referenced projects
     compile project(':SnapKit')
     compile project(':SnapTea')
     compile project(':SnapCharts')
@@ -52,6 +54,7 @@ task tv_compile (type: JavaExec){
     description = "Run TeaVM compiler"
     main = 'org.teavm.cli.TeaVMRunner'
     args = [ "-g", "-G", mainClassName, "-d", TV_OutDir ]
+    maxHeapSize = '500m'
     classpath = sourceSets.main.runtimeClasspath
 }
 
