@@ -18,7 +18,7 @@ dependencies {
     // This artifact has TeaVM runtimes and tools
     //compile group: 'org.teavm', name: 'teavm-cli', version: '0.6.1'
 
-    // Use teavm-cli jar from Github build:
+    // Use teavm-cli jar from local Github build:
     //    cmd> git clone https://github.com/konsoletyper/teavm.git; cd teavm
     //    cmd> git checkout d710870c65fb3f8b0700b5d5fbf39292cc7e9a7f (3/31/21) (optional - get specific release)
     //    cmd> mvn clean install -DskipTests -Dteavm.build.all=false
@@ -40,7 +40,8 @@ version = '1.0-SNAPSHOT'
 
 buildDir = 'build'
 
-mainClassName = 'tvmapps.TVSnapBuilder'
+// MainClassNames = tvmapps.TVSnapCharts, tvmapps.TVRMDraw, tvmapps.TVRM16, tvmapps.TVSnapBuilder
+mainClassName = 'tvmapps.TVSnapCharts'
 
 ext.TV_OutDir = '/tmp/tvmout'
 
