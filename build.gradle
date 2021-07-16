@@ -7,23 +7,24 @@ plugins {
 repositories {
     mavenCentral()
 
-    // This is for TeaVM official release
-    //maven { url = 'https://repo.maven.apache.org/maven2' }
+    // Maven package repository for latest TeaVM
+    maven { url 'https://teavm.org/maven/repository' }
 }
 
-project.ext.teavmVersion = "0.7.0-SNAPSHOT"
+// TeaVM version
+project.ext.teavmVersion = "0.7.0-dev-1196"  // "0.7.0-SNAPSHOT"
 
 dependencies {
-
-    // This artifact has TeaVM runtimes and tools
-    //compile group: 'org.teavm', name: 'teavm-cli', version: '0.6.1'
 
     // Use teavm-cli jar from local Github build:
     //    cmd> git clone https://github.com/konsoletyper/teavm.git; cd teavm
     //    cmd> git checkout d710870c65fb3f8b0700b5d5fbf39292cc7e9a7f (3/31/21) (optional - get specific release)
     //    cmd> mvn clean install -DskipTests -Dteavm.build.all=false
     //    cmd> cd tools/cli; mvn clean install
-    compile files('/Users/jeff/Dev/teavm/teavm-cli-0.7.0-SNAPSHOT.jar')
+    //compile files('/Users/jeff/Dev/teavm/teavm-cli-0.7.0-SNAPSHOT.jar')
+
+    // TeaVM (might also want 'teavm-devserver', 'jso', 'jso-apis', 'classlib')
+    implementation group: 'org.teavm', name: 'teavm-cli', version: "$teavmVersion"
 
     // Referenced projects
     compile project(':SnapKit')
