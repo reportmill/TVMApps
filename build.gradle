@@ -35,6 +35,8 @@ dependencies {
     compile project(':SnapBuilder')
     compile project(':RMDraw')
     compile project(':RM16')
+    compile project(':ComicScript')
+    compile project(':Puppets')
 }
 
 group = 'tvmapps'
@@ -42,7 +44,7 @@ version = '1.0-SNAPSHOT'
 
 buildDir = 'build'
 
-// MainClassNames = tvmapps.TVSnapCharts, tvmapps.TVRMDraw, tvmapps.TVRM16, tvmapps.TVSnapBuilder
+// MainClassNames = tvmapps.TVSnapCharts, tvmapps.TVRMDraw, TVRM16, TVSnapBuilder, TVComicScript, TVPuppets
 mainClassName = 'tvmapps.TVSnapCharts'
 
 ext.TV_OutDir = '/tmp/tvmout'
