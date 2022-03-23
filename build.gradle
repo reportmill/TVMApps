@@ -27,16 +27,16 @@ dependencies {
     implementation group: 'org.teavm', name: 'teavm-cli', version: "$teavmVersion"
 
     // Referenced projects
-    compile project(':SnapKit')
-    compile project(':SnapTea')
-    compile project(':SnapCharts')
-    compile project(':SnapChartsPro')
-    compile project(':SnapDemos')
-    compile project(':SnapBuilder')
-    compile project(':RMDraw')
-    compile project(':RM16')
-    compile project(':ComicScript')
-    compile project(':Puppets')
+    implementation project(':SnapKit')
+    implementation project(':SnapTea')
+    implementation project(':SnapCharts')
+    implementation project(':SnapChartsPro')
+    implementation project(':SnapDemos')
+    implementation project(':SnapBuilder')
+    implementation project(':RMDraw')
+    implementation project(':RM16')
+    implementation project(':ComicScript')
+    implementation project(':Puppets')
 }
 
 group = 'tvmapps'
@@ -87,7 +87,7 @@ task tv_copy_resources {
     doLast {
 
         // Get list of dependencies projects
-        Set <ProjectDependency> projDeps = configurations.compile.allDependencies.findAll { it instanceof ProjectDependency }
+        Set <ProjectDependency> projDeps = configurations.implementation.allDependencies.findAll { it instanceof ProjectDependency }
         Set <Project> projs = projDeps.collect { it.dependencyProject }
 
         // Copy resources from dependencies projects to
