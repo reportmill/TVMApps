@@ -33,6 +33,7 @@ dependencies {
     implementation project(':SnapChartsPro')
     implementation project(':SnapDemos')
     implementation project(':SnapBuilder')
+    implementation project(':SnapJava')
     implementation project(':RMDraw')
     implementation project(':RM16')
     implementation project(':ComicScript')
