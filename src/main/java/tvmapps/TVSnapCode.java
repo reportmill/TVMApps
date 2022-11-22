@@ -1,6 +1,6 @@
 package tvmapps;
 
-public class TVSnapJava {
+public class TVSnapCode {
 
     /**
      * Standard main method.
@@ -9,6 +9,6 @@ public class TVSnapJava {
     {
         snaptea.TV.set();
 
-        snapjava.app.App.main(args);
+        snapcode.app.App.main(args);
     }
 }

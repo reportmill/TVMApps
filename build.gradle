@@ -12,7 +12,8 @@ repositories {
 }
 
 // TeaVM version
-project.ext.teavmVersion = "0.7.0-dev-1196"  // "0.7.0-SNAPSHOT"
+project.ext.teavmVersion = "0.7.0-dev-1209"  // "0.7.0-SNAPSHOT"
+//project.ext.teavmVersion = "0.7.0-dev-1196"  // "0.7.0-SNAPSHOT"
 
 dependencies {
 
@@ -30,14 +31,15 @@ dependencies {
     implementation project(':SnapKit')
     implementation project(':SnapTea')
     implementation project(':SnapCharts')
-    implementation project(':SnapChartsPro')
+    //implementation project(':SnapChartsPro')
     implementation project(':SnapDemos')
     implementation project(':SnapBuilder')
-    implementation project(':SnapJava')
+    implementation project(':SnapCode')
     implementation project(':RMDraw')
     implementation project(':RM16')
-    implementation project(':ComicScript')
-    implementation project(':Puppets')
+    //implementation project(':ComicScript')
+    //implementation project(':Puppets')
+    implementation project(':JavaKit')
 }
 
 group = 'tvmapps'
@@ -46,7 +48,8 @@ version = '1.0-SNAPSHOT'
 buildDir = 'build'
 
 // MainClassNames = tvmapps.TVSnapCharts, tvmapps.TVRMDraw, TVRM16, TVSnapBuilder, TVComicScript, TVPuppets
-mainClassName = 'tvmapps.TVSnapCharts'
+//mainClassName = 'tvmapps.TVPuppets'
+mainClassName = 'tvmapps.TVSnapCode'
 
 ext.TV_OutDir = '/tmp/tvmout'
 
@@ -64,9 +67,10 @@ task tv_all {
  */
 task tv_compile (type: JavaExec){
     description = "Run TeaVM compiler"
+    jvmArgs = [ '-Xmx900m' ]
     main = 'org.teavm.cli.TeaVMRunner'
     args = [ "-g", "-G", mainClassName, "-d", TV_OutDir ]
-    maxHeapSize = '500m'
+    maxHeapSize = '800m'
     classpath = sourceSets.main.runtimeClasspath
 }
 
@@ -75,6 +79,7 @@ task tv_compile (type: JavaExec){
  */
 task tv_min (type: JavaExec){
     description = "Run TeaVM compiler"
+    jvmArgs = [ '-Xmx800m' ]
     main = 'org.teavm.cli.TeaVMRunner'
     args = [ "-m", mainClassName, "-d", TV_OutDir ]
     classpath = sourceSets.main.runtimeClasspath
