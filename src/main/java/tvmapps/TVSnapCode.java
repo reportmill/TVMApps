@@ -9,6 +9,6 @@ public class TVSnapCode {
     {
         snaptea.TV.set();
 
-        snapcode.app.App.main(args);
+        snapcode.appjr.App.main(args);
     }
 }
