@@ -3,10 +3,10 @@ plugins {
     id 'application'
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
+//java {
+//    sourceCompatibility = JavaVersion.VERSION_1_8
+//    targetCompatibility = JavaVersion.VERSION_1_8
+//}
 
 repositories {
     mavenCentral()
@@ -61,10 +61,10 @@ task tv_all {
  */
 task tv_compile (type: JavaExec){
     description = "Run TeaVM compiler"
-    jvmArgs = [ '-Xmx900m' ]
+    jvmArgs = [ '-Xmx1500m' ]
     main = 'org.teavm.cli.TeaVMRunner'
-    args = [ "-g", "-G", mainClassName, "-d", TV_OutDir ]
-    maxHeapSize = '800m'
+    args = [ "-d", TV_OutDir, "-g", "-G", mainClassName ]
+    maxHeapSize = '1500m'
     classpath = sourceSets.main.runtimeClasspath
 }
 
@@ -76,6 +76,17 @@ task tv_min (type: JavaExec){
     jvmArgs = [ '-Xmx800m' ]
     main = 'org.teavm.cli.TeaVMRunner'
     args = [ "-m", mainClassName, "-d", TV_OutDir ]
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+/**
+ * Run TeaVM compiler.
+ */
+task tv_dev (type: JavaExec){
+    description = "Run TeaVM compiler"
+    jvmArgs = [ '-Xmx1800m' ]
+    main = 'org.teavm.cli.TeaVMDevServerRunner'
+    args = [ "-p", sourceSets.main.runtimeClasspath, "-d", TV_OutDir, "--port", "8080", mainClassName ]
     classpath = sourceSets.main.runtimeClasspath
 }
 
