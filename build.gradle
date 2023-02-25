@@ -1,7 +1,6 @@
 
 plugins {
     id 'application'
-    id 'idea'
 }
 
 java {
@@ -17,45 +16,35 @@ repositories {
 }
 
 // TeaVM version
-project.ext.teavmVersion = "0.7.0-dev-1209"  // "0.7.0-SNAPSHOT"
-//project.ext.teavmVersion = "0.7.0-dev-1196"  // "0.7.0-SNAPSHOT"
+project.ext.teavmVersion = "0.7.0-dev-1209"
 
 dependencies {
 
-    // Use teavm-cli jar from local Github build:
-    //    cmd> git clone https://github.com/konsoletyper/teavm.git; cd teavm
-    //    cmd> git checkout d710870c65fb3f8b0700b5d5fbf39292cc7e9a7f (3/31/21) (optional - get specific release)
-    //    cmd> mvn clean install -DskipTests -Dteavm.build.all=false
-    //    cmd> cd tools/cli; mvn clean install
-    //compile files('/Users/jeff/Dev/teavm/teavm-cli-0.7.0-SNAPSHOT.jar')
-
     // TeaVM (might also want 'teavm-devserver', 'jso', 'jso-apis', 'classlib')
     implementation group: 'org.teavm', name: 'teavm-cli', version: "$teavmVersion"
+    //implementation files('/Users/Temp/teavm/tools/cli/build/libs/cli-0.8.0-SNAPSHOT-all.jar')
 
     // Referenced projects
     implementation project(':SnapKit')
     implementation project(':SnapTea')
     implementation project(':SnapCharts')
-    //implementation project(':SnapChartsPro')
     implementation project(':SnapDemos')
     implementation project(':SnapBuilder')
     implementation project(':SnapCode')
     implementation project(':RMDraw')
     implementation project(':RM16')
+    implementation project(':JavaKit')
     //implementation project(':ComicScript')
     //implementation project(':Puppets')
-    implementation project(':JavaKit')
 }
 
 group = 'tvmapps'
 version = '1.0-SNAPSHOT'
 
-buildDir = 'build'
-
 // MainClassNames = tvmapps.TVSnapCharts, tvmapps.TVRMDraw, TVRM16, TVSnapBuilder, TVComicScript, TVPuppets
-//mainClassName = 'tvmapps.TVPuppets'
 mainClassName = 'tvmapps.TVSnapCode'
 
+// Output directory
 ext.TV_OutDir = '/tmp/tvmout'
 
 /**
