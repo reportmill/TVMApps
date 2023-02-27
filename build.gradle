@@ -1,6 +1,7 @@
 
 plugins {
     id 'application'
+    //id "org.teavm" version "0.8.0-dev-2"
 }
 
 //java {
@@ -17,6 +18,7 @@ repositories {
 
 // TeaVM version
 project.ext.teavmVersion = "0.7.0-dev-1209"
+//project.ext.teavmVersion = "0.8.0-dev-2"
 
 dependencies {
 
@@ -46,6 +48,14 @@ mainClassName = 'tvmapps.TVSnapCode'
 
 // Output directory
 ext.TV_OutDir = '/tmp/tvmout'
+
+//teavm {
+//    js {
+//        mainClass.set("tvmapps.TVSnapCode")
+//        outputDir.set(new File(TV_OutDir))
+//        debugInformation.set(true)
+//    }
+//}
 
 /**
  * Compile and generate resources and html.
