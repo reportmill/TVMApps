@@ -4,11 +4,6 @@ plugins {
     //id "org.teavm" version "0.8.0-dev-2"
 }
 
-//java {
-//    sourceCompatibility = JavaVersion.VERSION_1_8
-//    targetCompatibility = JavaVersion.VERSION_1_8
-//}
-
 repositories {
     mavenCentral()
 
