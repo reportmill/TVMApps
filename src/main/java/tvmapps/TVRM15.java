@@ -2,6 +2,7 @@ package tvmapps;
 import com.reportmill.app.WelcomePanel;
 import com.reportmill.base.ReportMill;
 import snap.util.Prefs;
+import snap.view.ViewTheme;
 
 /**
  * Entry point class for RMDraw.
@@ -18,6 +19,7 @@ public class TVRM15 {
         ReportMill.isApp = true;
         Prefs prefs = Prefs.getPrefsForName("/com/reportmill");
         Prefs.setDefaultPrefs(prefs);
+        ViewTheme.setThemeForName("Light");
         WelcomePanel.getShared().showPanel();
     }
 }
