@@ -31,10 +31,7 @@ dependencies {
     implementation project(':RM15')
     implementation project(':SnapPDF')
     implementation project(':JavaKit')
-    //implementation project(':RMDraw')
-    //implementation project(':RM16')
     //implementation project(':ComicScript')
-    //implementation project(':Puppets')
 }
 
 group = 'tvmapps'
