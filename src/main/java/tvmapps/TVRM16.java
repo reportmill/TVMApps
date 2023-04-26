@@ -7,7 +7,7 @@ import snap.view.ViewTheme;
 /**
  * Entry point class for RMDraw.
  */
-public class TVRM15 {
+public class TVRM16 {
 
     /**
      * Standard main method.
