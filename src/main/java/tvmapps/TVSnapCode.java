@@ -1,5 +1,7 @@
 package tvmapps;
 
+import snapcode.app.App;
+
 public class TVSnapCode {
 
     /**
@@ -9,6 +11,6 @@ public class TVSnapCode {
     {
         snaptea.TV.set();
 
-        snapcode.appjr.App.main(args);
+        App.main(args);
     }
 }
