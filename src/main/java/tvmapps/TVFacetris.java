@@ -1,5 +1,5 @@
 package tvmapps;
-import snapdemos.facetris.Facetris;
+import snapdemos.facetris.FacetrisApp;
 
 public class TVFacetris {
 
@@ -9,7 +9,7 @@ public class TVFacetris {
     public static void main(String[] args)
     {
         snaptea.TV.set();
-        Facetris game = new Facetris();
+        FacetrisApp game = new FacetrisApp();
         game.getWindow().setMaximized(true);
         game.setWindowVisible(true);
     }
