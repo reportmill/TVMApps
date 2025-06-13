@@ -1,5 +1,5 @@
 package tvmapps;
-import comics.player.PlayerPane;
+//import comics.player.PlayerPane;
 import org.teavm.jso.JSBody;
 import snap.util.ArrayUtils;
 import snap.view.ViewUtils;
@@ -11,10 +11,10 @@ import snap.view.WindowView;
 public class TVComicScript {
 
     // The current Player
-    private static PlayerPane  _player;
+    //private static PlayerPane  _player;
 
     // All Players on page
-    private static PlayerPane[]  _players = new PlayerPane[20];
+    //private static PlayerPane[]  _players = new PlayerPane[20];
 
     /**
      * Standard main implementation.
@@ -39,7 +39,7 @@ public class TVComicScript {
 
         // If no arg0, just show app and return
         if (arg0 == null) {
-            comics.app.App.main(args);
+            //comics.app.App.main(args);
             return;
         }
 
@@ -57,23 +57,23 @@ public class TVComicScript {
     public static void showPlayerInHTMLElementForName(String anEmtId)
     {
         // Create new Player and add to Players
-        _player = new PlayerPane();
-        _players = ArrayUtils.add(_players, _player);
+        //_player = new PlayerPane();
+        //_players = ArrayUtils.add(_players, _player);
 
         // If name provided, set as Window.Name, which will cause window to use named Div element
         if(anEmtId != null && anEmtId.length() > 0) {
-            WindowView playerWin = _player.getWindow();
-            playerWin.setName(anEmtId);
+            //WindowView playerWin = _player.getWindow();
+            //playerWin.setName(anEmtId);
         }
 
         // Otherwise just showEditor
         else {
-            _player.getUI();
-            _player.setEditing(true);
+            //_player.getUI();
+            //_player.setEditing(true);
         }
 
         // Show Player
-        _player.showPlayer();
+        //_player.showPlayer();
     }
 
     /**
@@ -85,16 +85,16 @@ public class TVComicScript {
         if(anEmtId != null) {
 
             // Iterate over players and toggle editing for provided element id
-            for(PlayerPane player : _players) {
-                String playerWindowName = player.getWindow().getName();
-                if(anEmtId.equals(playerWindowName))
-                    player.setEditing(!player.isEditing());
-            }
+            //for(PlayerPane player : _players) {
+            //    String playerWindowName = player.getWindow().getName();
+            //    if(anEmtId.equals(playerWindowName))
+            //        player.setEditing(!player.isEditing());
+            //}
         }
 
         // If no element id, toggle Player.Editing for last player
-        else if(_player != null)
-            _player.setEditing(!_player.isEditing());
+        //else if(_player != null)
+        //    _player.setEditing(!_player.isEditing());
     }
 
     // Returns app main arg defined as global 'CSMainArg0'

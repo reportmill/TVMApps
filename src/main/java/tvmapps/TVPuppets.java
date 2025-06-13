@@ -9,6 +9,6 @@ public class TVPuppets {
     {
         snaptea.TV.set();
 
-        puppets.app.App.main(args);
+        //puppets.app.App.main(args);
     }
 }

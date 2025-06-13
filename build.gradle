@@ -4,6 +4,11 @@ plugins {
     //id "org.teavm" version "0.8.0-dev-2"
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 repositories {
     mavenCentral()
 
@@ -27,18 +32,17 @@ dependencies {
     implementation project(':SnapCharts')
     implementation project(':SnapDemos')
     implementation project(':SnapBuilder')
-    implementation project(':SnapCode')
-    implementation project(':RM15')
+    //implementation project(':SnapCode')
+    implementation project(':RM16')
     implementation project(':SnapPDF')
-    implementation project(':JavaKit')
     //implementation project(':ComicScript')
 }
 
 group = 'tvmapps'
 version = '1.0-SNAPSHOT'
 
-// MainClassNames = tvmapps.TVSnapCharts, tvmapps.TVRMDraw, TVRM16, TVSnapBuilder, TVComicScript, TVPuppets
-mainClassName = 'tvmapps.TVSnapCode'
+// MainClassNames = tvmapps.TVRM16, tvmapps.TVSnapCharts, TVSnapBuilder, TVComicScript, TVPuppets
+mainClassName = 'tvmapps.TVRM16' // 'TVPuzzle'
 
 // Output directory
 ext.TV_OutDir = '/tmp/tvmout'
@@ -77,7 +81,7 @@ task tv_compile (type: JavaExec){
  */
 task tv_min (type: JavaExec){
     description = "Run TeaVM compiler"
-    jvmArgs = [ '-Xmx800m' ]
+    jvmArgs = [ '-Xmx1500m' ]
     main = 'org.teavm.cli.TeaVMRunner'
     args = [ "-m", mainClassName, "-d", TV_OutDir ]
     classpath = sourceSets.main.runtimeClasspath
