@@ -1,6 +1,6 @@
 package tvmapps;
-import com.reportmill.app.WelcomePanel;
-import com.reportmill.base.ReportMill;
+//import com.reportmill.app.WelcomePanel;
+//import com.reportmill.base.ReportMill;
 import snap.util.Prefs;
 import snap.view.ViewTheme;
 
@@ -16,10 +16,10 @@ public class TVRM16 {
     {
         snaptea.TV.set();
 
-        ReportMill.isApp = true;
-        Prefs prefs = Prefs.getPrefsForName("/com/reportmill");
-        Prefs.setDefaultPrefs(prefs);
-        ViewTheme.setThemeForName("Light");
-        WelcomePanel.getShared().showPanel();
+//        ReportMill.isApp = true;
+//        Prefs prefs = Prefs.getPrefsForName("/com/reportmill");
+//        Prefs.setDefaultPrefs(prefs);
+//        ViewTheme.setThemeForName("Light");
+//        WelcomePanel.getShared().showPanel();
     }
 }

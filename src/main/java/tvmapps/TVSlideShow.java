@@ -1,6 +1,6 @@
 package tvmapps;
 
-public class TVFlatIcon {
+public class TVSlideShow {
 
     /**
      * Standard main method.
@@ -8,7 +8,6 @@ public class TVFlatIcon {
     public static void main(String[] args)
     {
         snaptea.TV.set();
-
-        snapbuild.app.FlatIconPanel.main(args);
+        snapdemos.snapshow.SlidePane.runApp(args);
     }
 }

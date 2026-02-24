@@ -10,6 +10,6 @@ public class TVSnapBuilder {
     {
         snaptea.TV.set();
 
-        snapbuild.app.App.main(args);
+        //snapbuild.app.App.main(args);
     }
 }

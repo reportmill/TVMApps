@@ -1,7 +1,8 @@
 
 plugins {
-    id 'application'
-    //id "org.teavm" version "0.8.0-dev-2"
+    id 'java'
+    id 'war'
+    id 'org.teavm' version '0.13.0'
 }
 
 java {
@@ -11,49 +12,43 @@ java {
 
 repositories {
     mavenCentral()
-
-    // Maven package repository for latest TeaVM
-    maven { url 'https://teavm.org/maven/repository' }
 }
-
-// TeaVM version
-project.ext.teavmVersion = "0.7.0-dev-1209"
-//project.ext.teavmVersion = "0.8.0-dev-2"
 
 dependencies {
 
     // TeaVM (might also want 'teavm-devserver', 'jso', 'jso-apis', 'classlib')
-    implementation group: 'org.teavm', name: 'teavm-cli', version: "$teavmVersion"
-    //implementation files('/Users/Temp/teavm/tools/cli/build/libs/cli-0.8.0-SNAPSHOT-all.jar')
+    //implementation group: 'org.teavm', name: 'teavm-cli', version: "$teavmVersion"
+    implementation teavm.libs.jsoApis
 
     // Referenced projects
     implementation project(':SnapKit')
     implementation project(':SnapTea')
-    implementation project(':SnapCharts')
     implementation project(':SnapDemos')
-    implementation project(':SnapBuilder')
-    //implementation project(':SnapCode')
-    implementation project(':RM16')
-    implementation project(':SnapPDF')
-    //implementation project(':ComicScript')
 }
 
 group = 'tvmapps'
 version = '1.0-SNAPSHOT'
 
 // MainClassNames = tvmapps.TVRM16, tvmapps.TVSnapCharts, TVSnapBuilder, TVComicScript, TVPuppets
-mainClassName = 'tvmapps.TVRM16' // 'TVPuzzle'
+//mainClassName = 'tvmapps.TVRM16' // 'TVPuzzle'
 
 // Output directory
 ext.TV_OutDir = '/tmp/tvmout'
 
-//teavm {
-//    js {
-//        mainClass.set("tvmapps.TVSnapCode")
-//        outputDir.set(new File(TV_OutDir))
-//        debugInformation.set(true)
-//    }
-//}
+teavm {
+    all {
+        mainClass = "tvmapps.TVSlideShow"
+        outputDir = file ("$buildDir" + "/libs")
+        optimization = org.teavm.gradle.api.OptimizationLevel.NONE
+    }
+    js {
+        addedToWebApp = true
+        obfuscated = false
+
+        // this is also optional, default value is <project name>.js
+        targetFileName = "example.js"
+    }
+}
 
 /**
  * Compile and generate resources and html.
@@ -67,36 +62,36 @@ task tv_all {
 /**
  * Run TeaVM compiler.
  */
-task tv_compile (type: JavaExec){
-    description = "Run TeaVM compiler"
-    jvmArgs = [ '-Xmx1500m' ]
-    main = 'org.teavm.cli.TeaVMRunner'
-    args = [ "-d", TV_OutDir, "-g", "-G", mainClassName ]
-    maxHeapSize = '1500m'
-    classpath = sourceSets.main.runtimeClasspath
-}
+//task tv_compile (type: JavaExec){
+//    description = "Run TeaVM compiler"
+//    jvmArgs = [ '-Xmx1500m' ]
+//    main = 'org.teavm.cli.TeaVMRunner'
+//    args = [ "-d", TV_OutDir, "-g", "-G", mainClassName ]
+//    maxHeapSize = '1500m'
+//    classpath = sourceSets.main.runtimeClasspath
+//}
 
 /**
  * Run TeaVM compiler.
  */
-task tv_min (type: JavaExec){
-    description = "Run TeaVM compiler"
-    jvmArgs = [ '-Xmx1500m' ]
-    main = 'org.teavm.cli.TeaVMRunner'
-    args = [ "-m", mainClassName, "-d", TV_OutDir ]
-    classpath = sourceSets.main.runtimeClasspath
-}
+//task tv_min (type: JavaExec){
+//    description = "Run TeaVM compiler"
+//    jvmArgs = [ '-Xmx1500m' ]
+//    main = 'org.teavm.cli.TeaVMRunner'
+//    args = [ "-m", mainClassName, "-d", TV_OutDir ]
+//    classpath = sourceSets.main.runtimeClasspath
+//}
 
 /**
  * Run TeaVM compiler.
  */
-task tv_dev (type: JavaExec){
-    description = "Run TeaVM compiler"
-    jvmArgs = [ '-Xmx1800m' ]
-    main = 'org.teavm.cli.TeaVMDevServerRunner'
-    args = [ "-p", sourceSets.main.runtimeClasspath, "-d", TV_OutDir, "--port", "8080", mainClassName ]
-    classpath = sourceSets.main.runtimeClasspath
-}
+//task tv_dev (type: JavaExec){
+//    description = "Run TeaVM compiler"
+//    jvmArgs = [ '-Xmx1800m' ]
+//    main = 'org.teavm.cli.TeaVMDevServerRunner'
+//    args = [ "-p", sourceSets.main.runtimeClasspath, "-d", TV_OutDir, "--port", "8080", mainClassName ]
+//    classpath = sourceSets.main.runtimeClasspath
+//}
 
 /**
  * Copies resource files from dependent projects to TeaVM output directory.
