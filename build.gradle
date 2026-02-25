@@ -39,14 +39,14 @@ teavm {
     all {
         mainClass = "tvmapps.TVSlideShow"
         outputDir = file ("$buildDir" + "/libs")
-        optimization = org.teavm.gradle.api.OptimizationLevel.NONE
+        //optimization = org.teavm.gradle.api.OptimizationLevel.NONE
     }
     js {
         addedToWebApp = true
-        obfuscated = false
+        //obfuscated = false
 
         // this is also optional, default value is <project name>.js
-        targetFileName = "example.js"
+        targetFileName = "classes.js"
     }
 }
 
