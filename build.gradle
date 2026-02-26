@@ -1,9 +1,13 @@
+import java.text.SimpleDateFormat
 
 plugins {
     id 'java'
     id 'war'
     id 'org.teavm' version '0.13.0'
 }
+
+group 'com.reportmill'
+version  new SimpleDateFormat("yyyy.MM").format(new Date())
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -16,8 +20,7 @@ repositories {
 
 dependencies {
 
-    // TeaVM (might also want 'teavm-devserver', 'jso', 'jso-apis', 'classlib')
-    //implementation group: 'org.teavm', name: 'teavm-cli', version: "$teavmVersion"
+    // TeaVM
     implementation teavm.libs.jsoApis
 
     // Referenced projects
@@ -26,16 +29,8 @@ dependencies {
     implementation project(':SnapDemos')
 }
 
-group = 'tvmapps'
-version = '1.0-SNAPSHOT'
-
-// MainClassNames = tvmapps.TVRM16, tvmapps.TVSnapCharts, TVSnapBuilder, TVComicScript, TVPuppets
-//mainClassName = 'tvmapps.TVRM16' // 'TVPuzzle'
-
-// Output directory
-ext.TV_OutDir = '/tmp/tvmout'
-
 teavm {
+
     all {
         mainClass = "tvmapps.TVSlideShow"
         outputDir = file ("$buildDir" + "/libs")
@@ -50,48 +45,8 @@ teavm {
     }
 }
 
-/**
- * Compile and generate resources and html.
- */
-tasks.register('tv_all') {
-    dependsOn 'tv_compile'
-    dependsOn 'tv_copy_resources'
-    dependsOn 'tv_gen_index_html'
-}
-
-/**
- * Run TeaVM compiler.
- */
-//task tv_compile (type: JavaExec){
-//    description = "Run TeaVM compiler"
-//    jvmArgs = [ '-Xmx1500m' ]
-//    main = 'org.teavm.cli.TeaVMRunner'
-//    args = [ "-d", TV_OutDir, "-g", "-G", mainClassName ]
-//    maxHeapSize = '1500m'
-//    classpath = sourceSets.main.runtimeClasspath
-//}
-
-/**
- * Run TeaVM compiler.
- */
-//task tv_min (type: JavaExec){
-//    description = "Run TeaVM compiler"
-//    jvmArgs = [ '-Xmx1500m' ]
-//    main = 'org.teavm.cli.TeaVMRunner'
-//    args = [ "-m", mainClassName, "-d", TV_OutDir ]
-//    classpath = sourceSets.main.runtimeClasspath
-//}
-
-/**
- * Run TeaVM compiler.
- */
-//task tv_dev (type: JavaExec){
-//    description = "Run TeaVM compiler"
-//    jvmArgs = [ '-Xmx1800m' ]
-//    main = 'org.teavm.cli.TeaVMDevServerRunner'
-//    args = [ "-p", sourceSets.main.runtimeClasspath, "-d", TV_OutDir, "--port", "8080", mainClassName ]
-//    classpath = sourceSets.main.runtimeClasspath
-//}
+// Output directory
+ext.TV_OutDir = '/tmp/tvmout'
 
 /**
  * Copies resource files from dependent projects to TeaVM output directory.
