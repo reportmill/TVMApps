@@ -53,7 +53,7 @@ teavm {
 /**
  * Compile and generate resources and html.
  */
-task tv_all {
+tasks.register('tv_all') {
     dependsOn 'tv_compile'
     dependsOn 'tv_copy_resources'
     dependsOn 'tv_gen_index_html'
@@ -96,44 +96,46 @@ task tv_all {
 /**
  * Copies resource files from dependent projects to TeaVM output directory.
  */
-//task tv_copy_resources {
-//
-//    doLast {
-//
-//        // Get list of dependencies projects
-//        Set <ProjectDependency> projDeps = configurations.implementation.allDependencies.findAll { it instanceof ProjectDependency }
-//        Set <Project> projs = projDeps.collect { it.dependencyProject }
-//
-//        // Copy resources from dependencies projects to
-//        Set <File> rsrDirs = projs.collectMany { it.sourceSets.main.resources.srcDirs }
-//        rsrDirs.each { myFile ->
-//            println "copyRes " + myFile + ", " + myFile.getClass()
-//            copy {
-//                from myFile
-//                into TV_OutDir
-//                exclude '**/*.java'
-//                includeEmptyDirs false
-//            }
-//        }
-//
-//        // Get all resource filenames, relative to TeaVM output directory
-//        List<String> txtFiles = rsrDirs.collectMany {
-//            String path = it.getAbsolutePath()
-//            List<String> paths = new FileNameFinder().getFileNames(path, "" /* includes */, '**/*.java' /* excludes */)
-//            paths.collect { it.substring(path.length()) }
-//        }
-//
-//        // Write resource filenames to index.txt file in TeaVM output directory
-//        File file = file(TV_OutDir + "/index.txt")
-//        file.write("")
-//        txtFiles.each { file.append(it); file.append('\n') }
-//    }
-//}
+tasks.register('tv_copy_resources') {
+
+    doLast {
+
+        // Get list of dependencies projects
+        DependencySet allDependencies = configurations.implementation.allDependencies
+        Set<ProjectDependency> projDeps = allDependencies.findAll { dep -> dep instanceof ProjectDependency }
+        Set<Project> projs = projDeps.collect { projDep -> projDep.dependencyProject }
+
+        // Copy resources from dependencies projects to
+        List<File> rsrDirs = projs.collectMany { it.sourceSets.main.resources.srcDirs }
+        rsrDirs.each { myFile ->
+            println "copyRes " + myFile + ", " + myFile.getClass()
+            copy {
+                from myFile
+                into TV_OutDir
+                exclude '**/*.java'
+                includeEmptyDirs false
+            }
+        }
+
+        // Get all resource filenames, relative to TeaVM output directory
+        List<String> rsrcFileNames = rsrDirs.collectMany { rsrcDir ->
+            String path = rsrcDir.getAbsolutePath()
+            FileTree files = fileTree(rsrcDir).matching { exclude '**/*.java' }
+            files.collect {file -> file.getAbsolutePath().substring(path.length()) }
+        }
+        Collections.sort(rsrcFileNames)
+
+        // Write resource filenames to index.txt file in TeaVM output directory
+        File file = file(TV_OutDir + "/index.txt")
+        file.write("")
+        rsrcFileNames.forEach(rsrcFile -> { file.append(rsrcFile); file.append('\n'); })
+    }
+}
 
 /**
  * Generates the TeaVM index.html file in TeaVM output directory.
  */
-task tv_gen_index_html {
+tasks.register('tv_gen_index_html') {
 
     doLast {
 
