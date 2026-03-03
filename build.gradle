@@ -36,11 +36,14 @@ teavm {
     }
     js {
         addedToWebApp = true
-        //obfuscated = false
-
-        // this is also optional, default value is <project name>.js
         targetFileName = "classes.js"
+        //obfuscated = false
     }
+//    wasmGC {
+//        addedToWebApp = true
+//        targetFileName = "classes.wasm"
+//        obfuscated = false
+//    }
 }
 
 // Output directory
