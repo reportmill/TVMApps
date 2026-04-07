@@ -19,7 +19,6 @@ public class TVRM16 {
 //        ReportMill.isApp = true;
 //        Prefs prefs = Prefs.getPrefsForName("/com/reportmill");
 //        Prefs.setDefaultPrefs(prefs);
-//        ViewTheme.setThemeForName("Light");
 //        WelcomePanel.getShared().showPanel();
     }
 }
